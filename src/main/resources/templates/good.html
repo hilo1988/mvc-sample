@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>GoodController</title>
+    <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+</head>
+<body>
+<div class="center w150">
+    <form method="POST" th:action="@{/good/search}">
+        <select name="unitId">
+            <option value="">ユニットを選択</option>
+            <option th:each="unit : ${units}" th:value="${unit.id}" th:selected="${unit.id == unitId}" th:inline="text">[[${unit.name}]]</option>
+        </select>
+        <br />
+
+        <input type="submit" name="search" value="検索" />
+    </form><br />
+</div>
+
+
+<table th:if="!${#lists.isEmpty(songs)}" class="center" border="1">
+    <tr>
+        <th>曲名</th>
+        <th>ユニット</th>
+    </tr>
+    <tr th:each="s : ${songs}" >
+        <td th:text="${s.songName}"/>
+        <td th:text="${s.unitName}"/>
+    </tr>
+
+</table>
+</body>
+</html>
